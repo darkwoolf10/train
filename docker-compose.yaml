@@ -33,11 +33,7 @@ services:
     command: composer install
 
   node:
-    image: "node:10"
-    user: "node"
-    working_dir: ${APP_PATH_CONTSINER}
+    build: './node'
     volumes:
-      - .${APP_PATH_HOST}:${APP_PATH_CONTSINER}
-    expose:
-      - "8081"
-    command: npm install && npm run dev  
+      - ${APP_PATH_HOST}:${APP_PATH_CONTSINER}
+    working_dir: ${APP_PATH_CONTSINER}
