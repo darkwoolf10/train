@@ -28,12 +28,12 @@ services:
   composer:
     image: composer
     volumes:
-      - ${APP_PATH_HOST}:${APP_PATH_CONTSINER}
+      - .:${APP_PATH_CONTSINER}
     working_dir: ${APP_PATH_CONTSINER}
     command: composer install
 
   node:
-    build: './node'
+    build: ./node
     volumes:
       - ${APP_PATH_HOST}:${APP_PATH_CONTSINER}
     working_dir: ${APP_PATH_CONTSINER}

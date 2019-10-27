@@ -81,8 +81,7 @@
             @endif
 
             <div class="content">
-                TEST
-                <div id="hello"></div>
+                <div id="ticket-search"></div>
             </div>
         </div>
         <script type="text/javascript" src="js/app.js"></script>
