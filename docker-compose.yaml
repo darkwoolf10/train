@@ -37,3 +37,4 @@ services:
     volumes:
       - ${APP_PATH_HOST}:${APP_PATH_CONTSINER}
     working_dir: ${APP_PATH_CONTSINER}
+    command: npm run watch
