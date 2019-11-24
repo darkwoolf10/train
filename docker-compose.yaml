@@ -8,33 +8,32 @@ services:
     volumes:
       - ${APP_PATH_HOST}:${APP_PATH_CONTSINER}
     ports:
-      - 8000:80
-    working_dir: ${APP_PATH_CONTSINER}     
+      - 8080:80
+    working_dir: ${APP_PATH_CONTSINER}
 
   db:
-    image: mariadb
+    image: postgres
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: 12345678
-    volumes:
-      - ${DB_PATH_HOST}:/var/lib/mysql
+      POSTGRES_PASSWORD: example
 
   adminer:
     image: adminer
     restart: always
+    depends_on:
+      - db
     ports:
       - 6080:8080    
 
   composer:
-    image: composer
+    image: composer:1.6
     volumes:
-      - .:${APP_PATH_CONTSINER}
+      - ${APP_PATH_HOST}:${APP_PATH_CONTSINER}
     working_dir: ${APP_PATH_CONTSINER}
     command: composer install
 
   node:
-    build: ./node
+    image: "node:10"
+    working_dir: ${APP_PATH_CONTSINER}
     volumes:
       - ${APP_PATH_HOST}:${APP_PATH_CONTSINER}
-    working_dir: ${APP_PATH_CONTSINER}
-    command: npm run watch
