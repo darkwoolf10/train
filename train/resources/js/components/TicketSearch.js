@@ -6,10 +6,10 @@ import SearchIcon from '@material-ui/icons/Search';
 export default class TicketSearch extends Component {
     render() {
         return (
-            <form action="" method="POST">
-                <Input type="text" />
-                <SearchIcon onClick='' />
-            </form>
+            // <form action="" method="POST">
+            //     <Input type="text" />
+            //     <SearchIcon onClick='' />
+            // </form>
         );
     }
 }
