@@ -16,6 +16,10 @@ services:
     restart: always
     environment:
       POSTGRES_PASSWORD: example
+    volumes:
+      - ${DATABASE_PATH}:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
 
   adminer:
     image: adminer
@@ -33,7 +37,9 @@ services:
     command: composer install
 
   node:
-    image: "node:10"
+    image: "node:8"
+    user: "node"
     working_dir: ${APP_PATH_CONTSINER}
     volumes:
       - ${APP_PATH_HOST}:${APP_PATH_CONTSINER}
+    command: "npm run watch"

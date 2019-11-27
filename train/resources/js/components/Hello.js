@@ -8,9 +8,7 @@ export default class Hello extends Component {
             <div className="container">
                 HELLO MY FRIEND!
                 <br/>
-                <Button variant="contained" color="primary">
-                    Hello World
-                </Button>
+
             </div>
         );
     }
