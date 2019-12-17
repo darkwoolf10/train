@@ -14,4 +14,4 @@ require('./bootstrap');
 
 require('./components/Example');
 require('./components/Hello');
-require('./components/TicketSearch');
+require('./components/ticket-search/TicketSearch');
