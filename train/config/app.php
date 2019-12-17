@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Laratrust\LaratrustServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -225,7 +226,10 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'Laratrust'   => Laratrust\LaratrustFacade::class,
+        'role' => \Laratrust\Middleware\LaratrustRole::class,
+        'permission' => \Laratrust\Middleware\LaratrustPermission::class,
+        'ability' => \Laratrust\Middleware\LaratrustAbility::class,
     ],
 
 ];
