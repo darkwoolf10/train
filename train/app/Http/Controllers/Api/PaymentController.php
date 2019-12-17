@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Payment;
+use App\Ticket;
 use App\Http\Controllers\Controller;
-use App\Models\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 /**
  * Class PaymentController
@@ -14,6 +16,7 @@ class PaymentController extends Controller
 {
     /**
      * @param Request $request
+     * @return JsonResponse
      */
     public function payment(Request $request)
     {
@@ -23,15 +26,18 @@ class PaymentController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return \InvalidArgumentException('Invalid data');
+            throw new \InvalidArgumentException('Invalid data');
         }
 
         $payment = new Payment();
         $payment->cardNumber = $request->get('cardNumber');
         $payment->price = $request->get('price');
 
-        if ($request->has('user')) {
+        $ticket = new Ticket();
+        $ticket->payment()->save($payment);
 
-        }
+        return response()->json([
+           'response' => 'Payment was successful!',
+        ]);
     }
 }
