@@ -1,0 +1,63 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Route;
+use App\Station;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Validator;
+
+class RouteController extends Controller
+{
+    /**
+     * @return JsonResponse
+     */
+    public function index()
+    {
+        $routes = Route::all();
+
+        return response()->json([
+            'response' => $routes
+        ]);
+    }
+
+    /**
+     * @param $request
+     * @return JsonResponse
+     */
+    public function store($request)
+    {
+
+        $validator = Validator::make(Request::all(),[
+            'from' => 'required',
+            'to' => 'required',
+            'price' => 'required|float',
+            'departure_time' => 'required',
+            'arrival_time' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return response()->json([
+                'error' => $validator->messages()
+            ], 400);
+        }
+
+        $route = new Route();
+        $route->price = $request->get('price');
+        $route->departure_time = $request->get('departure_time');
+        $route->arrival_time = $request->get('arrival_time');
+
+        $form = Station::where('city', $request->get('from'));
+        $to = Station::where('city', $request->get('to'));
+
+        $route->from()->save($form);
+        $route->to()->save($to);
+        $route->save();
+
+        return response()->json([
+            'response' => 'Route created!'
+        ], 201);
+    }
+}
