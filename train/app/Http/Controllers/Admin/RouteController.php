@@ -45,12 +45,12 @@ class RouteController extends Controller
         }
 
         $route = new Route();
-        $route->price = $request->get('price');
-        $route->departure_time = $request->get('departure_time');
-        $route->arrival_time = $request->get('arrival_time');
+        $route->price = Request::get('price');
+        $route->departure_time = Request::get('departure_time');
+        $route->arrival_time = Request::get('arrival_time');
 
-        $form = Station::where('city', $request->get('from'));
-        $to = Station::where('city', $request->get('to'));
+        $form = Station::where('city', Request::get('from'));
+        $to = Station::where('city', Request::get('to'));
 
         $route->from()->save($form);
         $route->to()->save($to);
