@@ -11,8 +11,12 @@ svg:hover {
 }
 
 .searchTicket {
-  width: 15rem;
+  width: 24rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.MuiFormControl-marginNormal {
+  margin: 0!important;
 }
