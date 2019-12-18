@@ -4,7 +4,6 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import SearchIcon from '@material-ui/icons/Search';
-import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns'
 import {
   MuiPickersUtilsProvider,
@@ -18,7 +17,7 @@ export default class TicketSearch extends Component {
   constructor() {
     super()
     this.state = {
-      cities: ['Cherkassy', 'Kiev', 'Smila', 'Lviv', 'Dnipro', 'Odessa'],
+      cities: [],
       from: '',
       to: '',
       selectedDate: new Date()
@@ -35,6 +34,7 @@ export default class TicketSearch extends Component {
       [event.target.name]: event.target.value
     })
   }
+
   handleDateChange(date) {
     console.log(date);
     this.setState({
@@ -45,6 +45,15 @@ export default class TicketSearch extends Component {
 
   search(event) {
     console.log(this.state.selectedDate);
+  }
+
+  componentDidMount() {
+    fetch('http://localhost:8080/public/api/stations')
+      .then(res => res.json())
+      .then(data => this.setState({
+        ...this.state,
+        cities: data
+      }))
   }
 
   render() {
@@ -59,7 +68,7 @@ export default class TicketSearch extends Component {
             onChange={this.hadleChange}
           >
             {
-              this.state.cities.map((el, index) => <MenuItem value={el} key={index} >{el}</MenuItem>)
+              this.state.cities.map((city, index) => <MenuItem value={city.name} key={index} >{city.name}</MenuItem>)
             }
           </Select>
         </div>
@@ -72,24 +81,24 @@ export default class TicketSearch extends Component {
             onChange={this.hadleChange}
           >
             {
-              this.state.cities.map((el, index) => <MenuItem value={el} key={index} >{el}</MenuItem>)
+              this.state.cities.map((city, index) => <MenuItem value={city.name} key={index} >{city.name}</MenuItem>)
             }
           </Select>
         </div>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <KeyboardDatePicker
-              disableToolbar
-              variant="inline"
-              format="MM/dd/yyyy"
-              margin="normal"
-              id="date-picker-inline"
-              label="Select date"
-              value={this.state.selectedDate}
-              onChange={this.handleDateChange}
-              KeyboardButtonProps={{
-                'aria-label': 'change date',
-              }}
-            />
+          <KeyboardDatePicker
+            disableToolbar
+            variant="inline"
+            format="MM/dd/yyyy"
+            margin="normal"
+            id="date-picker-inline"
+            label="Select date"
+            value={this.state.selectedDate}
+            onChange={this.handleDateChange}
+            KeyboardButtonProps={{
+              'aria-label': 'change date',
+            }}
+          />
         </MuiPickersUtilsProvider>
         <SearchIcon onClick={this.search}></SearchIcon>
       </form>
