@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/payment', 'Api\PaymentController@payment')->name('payment');
 Route::get('/stations', 'Api\StationsController@index')->name('stations');
+Route::get('/find-routes', 'Api\RouteController@find')->name('find-routes');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
