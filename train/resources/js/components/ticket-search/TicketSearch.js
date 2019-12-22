@@ -9,6 +9,7 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+import axios from 'axios';
 
 import './TicketSearch.css';
 
@@ -48,12 +49,11 @@ export default class TicketSearch extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:8080/public/api/stations')
-      .then(res => res.json())
-      .then(data => this.setState({
+    axios.get('api/stations')
+      .then(res => this.setState({
         ...this.state,
-        cities: data
-      }))
+        cities: res.data
+      }));
   }
 
   render() {
