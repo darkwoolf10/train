@@ -1,0 +1,9 @@
+.MuiInput-underline {
+  width: 14rem;
+}
+
+.MuiDialogContent-root {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}

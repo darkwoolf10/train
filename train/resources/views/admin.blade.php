@@ -65,11 +65,11 @@
     </style>
 </head>
 <body>
-<div class="flex-center position-ref full-height">
-    <div class="content">
-        Admin page
+    <div class="flex-center position-ref full-height">
+        <div class="content">
+            <div id="admin-page"></div>
+        </div>
     </div>
-</div>
 <script type="text/javascript" src="js/app.js"></script>
 </body>
 </html>

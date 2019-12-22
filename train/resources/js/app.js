@@ -15,3 +15,4 @@ require('./bootstrap');
 require('./components/Example');
 require('./components/Hello');
 require('./components/ticket-search/TicketSearch');
+require('./components/admin-page/AdminPage');
