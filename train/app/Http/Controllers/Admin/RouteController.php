@@ -24,12 +24,10 @@ class RouteController extends Controller
     }
 
     /**
-     * @param $request
      * @return JsonResponse
      */
-    public function store($request)
+    public function store()
     {
-
         $validator = Validator::make(Request::all(),[
             'from' => 'required',
             'to' => 'required',
