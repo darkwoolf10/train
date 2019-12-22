@@ -9,6 +9,7 @@ import DateFnsUtils from '@date-io/date-fns'
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import FormControl from '@material-ui/core/FormControl';
 
 import {
   MuiPickersUtilsProvider,
@@ -21,28 +22,31 @@ import './AddRoute.css';
 export default class AddRoute extends Component {
   constructor(props) {
     super(props);
+    const date = new Date();
     this.state = {
       fromCityName: '',
       toCityName: '',
-      departureTime: Date.now(),
-      arrivalTime: Date.now(),
-      departureDate: Date.now(),
-      arrivalDate: Date.now(),
+      departureTime: date,
+      arrivalTime: date,
+      departureDate: date,
+      arrivalDate: date,
       price: '',
       trainNumber: '',
-      namberOfCarriages: '',
+      numberOfCarriages: '',
       cities: []
     }
-    this.handleClose = this.handleClose.bind(this);
     this.hadleDepartureTimeChange = this.hadleDepartureTimeChange.bind(this);
     this.hadleDepartureDateChange = this.hadleDepartureDateChange.bind(this);
     this.hadleArrivalTimeChange = this.hadleArrivalTimeChange.bind(this);
     this.hadleChange = this.hadleChange.bind(this);
     this.hadleArrivalDateChange = this.hadleArrivalDateChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleClose() {
     this.props.closeForm()
+    this.handleSubmit = this.handleSubmit.bind(this);
+
   }
 
   hadleDepartureTimeChange(date) {
@@ -74,16 +78,29 @@ export default class AddRoute extends Component {
   }
 
   hadleChange(event) {
-    console.log(event.target.value);
     this.setState({
       ...this.state,
       [event.target.name]: event.target.value
     })
   }
 
-  createTraineRoute() {
-    // POST method
-    this.props.closeForm()
+  handleSubmit(event) {
+    event.preventDefault();
+    const route = {
+      fromCityName: this.state.fromCityName,
+      toCityName: this.state.toCityName,
+      departureTime: this.state.departureTime,
+      departureDate: this.state.departureDate,
+      arrivalTime: this.state.arrivalTime,
+      arrivalDate: this.state.arrivalDate,
+      price: this.state.price,
+      trainNumber: this.state.trainNumber,
+      numberOfCarriages: this.state.numberOfCarriages
+    };
+
+    axios.post('api/admin/route-store', { route })
+
+    this.props.closeForm();
   }
 
   componentDidMount() {
@@ -98,12 +115,13 @@ export default class AddRoute extends Component {
     return (
 
       <Dialog open={this.props.showModal} aria-labelledby="form-dialog-title">
-        <form className="addNewTrainRoute">
+        <form onSubmit={this.handleSubmit} className="addNewTrainRoute">
           <DialogTitle id="form-dialog-title">Add new train route</DialogTitle>
           <DialogContent>
-            <div className="from">
+            <FormControl required className="from">
               <InputLabel id="demo-simple-select-label">From</InputLabel>
               <Select
+                required
                 name="fromCityName"
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
@@ -113,10 +131,11 @@ export default class AddRoute extends Component {
                   this.state.cities.map((city, index) => <MenuItem value={city.name} key={index} >{city.name}</MenuItem>)
                 }
               </Select>
-            </div>
-            <div className="to">
+            </FormControl>
+            <FormControl  required className="to">
               <InputLabel id="demo-simple-select-label">To</InputLabel>
               <Select
+                required
                 name="toCityName"
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
@@ -126,9 +145,10 @@ export default class AddRoute extends Component {
                   this.state.cities.map((city, index) => <MenuItem value={city.name} key={index} >{city.name}</MenuItem>)
                 }
               </Select>
-            </div>
+            </FormControl>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardTimePicker
+                required
                 margin="normal"
                 id="time-picker"
                 label="Departure time"
@@ -139,6 +159,7 @@ export default class AddRoute extends Component {
                 }}
               />
               <KeyboardTimePicker
+                required
                 margin="normal"
                 id="time-picker"
                 label="Arrival time"
@@ -149,6 +170,7 @@ export default class AddRoute extends Component {
                 }}
               />
               <KeyboardDatePicker
+                required
                 disableToolbar
                 variant="inline"
                 format="MM/dd/yyyy"
@@ -162,6 +184,7 @@ export default class AddRoute extends Component {
                 }}
               />
               <KeyboardDatePicker
+                required
                 disableToolbar
                 variant="inline"
                 format="MM/dd/yyyy"
@@ -169,36 +192,42 @@ export default class AddRoute extends Component {
                 id="date-picker-inline"
                 label="Arrival date"
                 value={this.state.arrivalDate}
-                onChange={this.hadleDepartureDateChange}
+                onChange={this.hadleArrivalDateChange}
                 KeyboardButtonProps={{
                   'aria-label': 'change date',
                 }}
               />
             </MuiPickersUtilsProvider>
             <TextField
+              required
+              type="number"
               onChange={this.hadleChange}
               name="price"
               id="standard"
               label="Price"
             />
             <TextField
+              required
+              type="number"
               onChange={this.hadleChange}
               name="trainNumber"
               id="standard"
               label="Train number"
             />
             <TextField
+              required
+              type="number"
               onChange={this.hadleChange}
-              name="namberOfCarriages"
+              name="numberOfCarriages"
               id="standard"
               label="Number of carriages"
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.props.closeForm} color="primary">
               Cancel
         </Button>
-            <Button onClick={this.createTraineRoute} color="primary">
+            <Button type="submit" color="primary">
               Create
         </Button>
           </DialogActions>
