@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @package App
@@ -15,6 +16,14 @@ class Ticket extends Model
      */
     public function payment()
     {
-        return $this->hasOne('App\Payment');
+        return $this->hasOne(Payment::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function route()
+    {
+        return $this->belongsTo(Route::class);
     }
 }

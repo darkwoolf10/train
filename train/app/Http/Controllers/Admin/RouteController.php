@@ -58,4 +58,20 @@ class RouteController extends Controller
             'response' => 'Route created!'
         ], 201);
     }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getRoutesByDate(Request $request): JsonResponse
+    {
+        $from = $request->get('from');
+        $to = $request->get('to');
+        $date = $request->get('date');
+        $routes = Route::where('from', $from)->andWhere('to', $to)->andWhere('date', $date)->get();
+
+        return response()->json([
+            'routes' => $routes,
+        ], 200);
+    }
 }
