@@ -106,6 +106,6 @@ export default class TicketSearch extends Component {
   }
 }
 
-if (document.getElementById('ticket-search')) {
-  ReactDOM.render(<TicketSearch />, document.getElementById('ticket-search'));
-}
+// if (document.getElementById('ticket-search')) {
+//   ReactDOM.render(<TicketSearch />, document.getElementById('ticket-search'));
+// }

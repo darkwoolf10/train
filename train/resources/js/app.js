@@ -16,3 +16,6 @@ require('./components/Example');
 require('./components/Hello');
 require('./components/ticket-search/TicketSearch');
 require('./components/admin-page/AdminPage');
+require('./components/choose-seat/ChooseSeat');
+require('./components/admin-page/train-route-list/TrainRouteList')
+require('./components/admin-page/train-route-list-item/TrainRouteListItem')

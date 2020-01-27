@@ -5,6 +5,7 @@ import {
   Switch,
   Route
 } from 'react-router-dom';
+import TicketSearch from '../ticket-search/TicketSearch';
 
 export default class App extends Component {
 
