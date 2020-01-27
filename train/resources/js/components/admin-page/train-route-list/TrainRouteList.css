@@ -1,0 +1,22 @@
+.routes-table {
+  width: 650px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-around;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.header-column {
+  width: 130px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.column {
+  width: 122px;
+  display: flex;
+  justify-content: flex-start;
+}

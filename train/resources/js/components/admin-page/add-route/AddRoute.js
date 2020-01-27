@@ -95,7 +95,6 @@ export default class AddRoute extends Component {
       arrivalDate: this.state.arrivalDate,
       price: this.state.price,
       trainNumber: this.state.trainNumber,
-      numberOfCarriages: this.state.numberOfCarriages
     };
 
     axios.post('api/admin/route-store', { route })
@@ -132,7 +131,7 @@ export default class AddRoute extends Component {
                 }
               </Select>
             </FormControl>
-            <FormControl  required className="to">
+            <FormControl required className="to">
               <InputLabel id="demo-simple-select-label">To</InputLabel>
               <Select
                 required
@@ -213,14 +212,6 @@ export default class AddRoute extends Component {
               name="trainNumber"
               id="standard"
               label="Train number"
-            />
-            <TextField
-              required
-              type="number"
-              onChange={this.hadleChange}
-              name="numberOfCarriages"
-              id="standard"
-              label="Number of carriages"
             />
           </DialogContent>
           <DialogActions>

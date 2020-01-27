@@ -1,0 +1,17 @@
+.seat {
+  width: 40px;
+  height: 20px;
+}
+
+.up {
+  border-top: 2px solid darkblue;;
+}
+
+.down {
+  border-bottom: 2px solid darkblue;;
+}
+
+.seat:hover {
+  cursor: pointer;
+  background-color: darkgray;
+}
