@@ -30,6 +30,7 @@ export default class TicketSearch extends Component {
   }
 
   hadleChange(event) {
+    console.log(event);
     this.setState({
       ...this.state,
       [event.target.name]: event.target.value
@@ -37,7 +38,6 @@ export default class TicketSearch extends Component {
   }
 
   handleDateChange(date) {
-    console.log(date);
     this.setState({
       ...this.state,
       selectedDate: date
@@ -45,7 +45,13 @@ export default class TicketSearch extends Component {
   }
 
   search(event) {
-    console.log(this.state.selectedDate);
+    axios.get('api/find-routes', {
+      params: {
+        from: this.state.from,
+        to: this.state.to,
+        date: this.state.selectedDate
+      }
+    })
   }
 
   componentDidMount() {
@@ -68,7 +74,7 @@ export default class TicketSearch extends Component {
             onChange={this.hadleChange}
           >
             {
-              this.state.cities.map((city, index) => <MenuItem value={city.name} key={index} >{city.name}</MenuItem>)
+              this.state.cities.map((city, index) => <MenuItem value={city.name} key={city.id} >{city.name}</MenuItem>)
             }
           </Select>
         </div>
@@ -81,7 +87,7 @@ export default class TicketSearch extends Component {
             onChange={this.hadleChange}
           >
             {
-              this.state.cities.map((city, index) => <MenuItem value={city.name} key={index} >{city.name}</MenuItem>)
+              this.state.cities.map((city, index) => <MenuItem value={city.name} key={city.id} >{city.name}</MenuItem>)
             }
           </Select>
         </div>
