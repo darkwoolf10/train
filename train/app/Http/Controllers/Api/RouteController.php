@@ -79,4 +79,31 @@ class RouteController extends Controller
             'response' => $ticketsPosition,
         ]);
     }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function findRoutes(Request $request): JsonResponse
+    {
+        $from = Station::where('name', $request->get('from'))->first();
+        $to = Station::where('name', $request->get('to'))->first();
+        $routes = Route::where('from_id', $from->id)->where('to_id', $to->id)->get();
+        $findDate =  Carbon::parse($request->get('date'))->format('Y/m/d');
+        $resultRoutes = [];
+
+        foreach ($routes as $route) {
+            $routeDate = Carbon::parse($route->arrival_time)->format('Y/m/d');
+
+            if ($findDate === $routeDate) {
+                $route['from'] = $route->from;
+                $route['to'] = $route->to;
+                $resultRoutes[] = $route;
+            }
+        }
+
+        return response()->json([
+            'response' => $resultRoutes,
+        ]);
+    }
 }
