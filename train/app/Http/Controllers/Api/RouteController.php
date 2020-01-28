@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Route;
 use App\Station;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 /**
  * @package App\Http\Controllers\Api
@@ -16,12 +16,25 @@ class RouteController extends Controller
     /**
      * @return JsonResponse
      */
-    public function find()
+    public function index()
     {
-        $from = Station::where('city', Request::get('from'));
-        $to = Station::where('city', Request::get('to'));
+        $routes = Route::all();
 
-        $routes = Route::where('from', '=', $from->id)->andWhere('to', '=', $to->id)->get();
+        return response()->json([
+            'response' => $routes
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function find(Request $request): JsonResponse
+    {
+        $from = Station::where('city', $request->get('from'));
+        $to = Station::where('city', $request->get('to'));
+
+        $routes = Route::where('from_id', '=', $from->id)->andWhere('to_id', '=', $to->id)->get();
 
         if (!$routes) {
             return response()->json([
@@ -30,7 +43,25 @@ class RouteController extends Controller
         }
 
         return response()->json([
-            'response' => $routes
+            'response' => $routes,
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function emptySeats(Request $request): JsonResponse
+    {
+        $route = Route::find($request->get('route'));
+        $ticketsPosition = [];
+
+        foreach ($route->tickets as $ticket) {
+            $ticketsPosition[] = $ticket['position'];
+        }
+
+        return response()->json([
+            'response' => $ticketsPosition,
         ]);
     }
 }

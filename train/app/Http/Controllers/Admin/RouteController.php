@@ -27,18 +27,6 @@ class RouteController extends Controller
     }
 
     /**
-     * @return JsonResponse
-     */
-    public function index()
-    {
-        $routes = Route::all();
-
-        return response()->json([
-            'response' => $routes
-        ]);
-    }
-
-    /**
      * @param Request $request
      * @return JsonResponse
      */
@@ -64,7 +52,7 @@ class RouteController extends Controller
         }
 
         $route = new Route();
-        $route->price = $request->get('price');
+        $route->price = $requestData['price'];
         $departureDatetime = $this->dateTimeHelper
             ->formateDateTime($requestData['departureDate'], $requestData['departureTime']);
         $route->departure_time = $departureDatetime;
@@ -77,7 +65,6 @@ class RouteController extends Controller
         $to = Station::where('city', $requestData['toCityName'])->first();
         $route->from()->associate($from);
         $route->to()->associate($to);
-
         $route->save();
 
         return response()->json([

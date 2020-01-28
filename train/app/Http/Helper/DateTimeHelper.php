@@ -13,9 +13,7 @@ class DateTimeHelper
      */
     public function formateDateTime(string $date, string $time): string
     {
-        return Carbon::parse($date)
-                ->addHour()
-                ->addHour()
-                ->format('Y/m/d') . ' ' . Carbon::parse($time)->format('H:i');
+        return Carbon::parse($date)->format('Y/m/d')
+            . ' ' . Carbon::parse($time)->addHour()->addHour()->format('g:i A');
     }
 }

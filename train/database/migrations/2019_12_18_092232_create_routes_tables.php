@@ -15,18 +15,19 @@ class CreateRoutesTables extends Migration
     {
         Schema::create('routes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('from')->unsigned();
-            $table->integer('to')->unsigned();
+            $table->integer('from_id')->unsigned();
+            $table->integer('to_id')->unsigned();
             $table->float('price');
             $table->time('departure_time');
             $table->time('arrival_time');
+            $table->timestamps();
 
-            $table->foreign('from')
+            $table->foreign('from_id')
                 ->references('id')
                 ->on('stations')
                 ->onDelete('cascade');
 
-            $table->foreign('to')
+            $table->foreign('to_id')
                 ->references('id')
                 ->on('stations')
                 ->onDelete('cascade');
