@@ -56,6 +56,6 @@ export default class TrainRouteList extends Component {
 }
 
 
-if (document.getElementById('ticket-search')) {
-  ReactDOM.render(<TrainRouteList />, document.getElementById('ticket-search'));
-}
+// if (document.getElementById('ticket-search')) {
+//   ReactDOM.render(<TrainRouteList />, document.getElementById('ticket-search'));
+// }

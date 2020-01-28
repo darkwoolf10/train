@@ -1,6 +1,7 @@
 .seat {
   width: 40px;
   height: 20px;
+  border-radius: 2px;
 }
 
 .up {
@@ -14,4 +15,26 @@
 .seat:hover {
   cursor: pointer;
   background-color: darkgray;
+}
+
+.selected {
+  background-color: tomato ;
+}
+
+.selected:hover {
+  background-color: tomato!important ;
+}
+
+
+.up.sold {
+  border-top: 2px solid gray;
+}
+
+.down.sold { 
+  border-bottom: 2px solid gray;
+}
+
+.sold:hover {
+  background-color: white;
+  cursor: default;
 }
