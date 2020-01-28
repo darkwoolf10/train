@@ -23,6 +23,7 @@ class RouteController extends Controller
 
         foreach ($routes as $route) {
             $route['from'] = $route->from;
+            $route['to'] = $route->to;
         }
 
         return response()->json([

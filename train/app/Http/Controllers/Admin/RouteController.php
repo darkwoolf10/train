@@ -33,7 +33,6 @@ class RouteController extends Controller
     public function store(Request $request)
     {
         $requestData = $request->get('route');
-        $from = Station::where('city', $requestData['fromCityName'])->first();
         $validator = Validator::make($request->all(),[
             'route.fromCityName' => 'required',
             'route.toCityName' => 'required',
