@@ -52,6 +52,7 @@ class RouteController extends Controller
 
         $route = new Route();
         $route->price = $requestData['price'];
+        $route->train_number = $requestData['trainNumber'];
         $departureDatetime = $this->dateTimeHelper
             ->formateDateTime($requestData['departureDate'], $requestData['departureTime']);
         $route->departure_time = $departureDatetime;

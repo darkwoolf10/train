@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property \DateTime arrival_time
  * @property mixed from
  * @property mixed to
+ * @property STRING train_number
  * @package App
  */
 class Route extends Model
