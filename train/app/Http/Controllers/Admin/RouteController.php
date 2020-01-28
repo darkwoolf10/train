@@ -2,15 +2,30 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Helper\DateTimeHelper;
 use App\Route;
 use App\Station;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class RouteController extends Controller
 {
+    /**
+     * @var DateTimeHelper
+     */
+    private $dateTimeHelper;
+
+    /**
+     * @param DateTimeHelper $dateTimeHelper
+     */
+    public function __construct(
+      DateTimeHelper $dateTimeHelper
+    ) {
+        $this->dateTimeHelper = $dateTimeHelper;
+    }
+
     /**
      * @return JsonResponse
      */
@@ -24,16 +39,22 @@ class RouteController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return JsonResponse
      */
-    public function store()
+    public function store(Request $request)
     {
-        $validator = Validator::make(Request::all(),[
-            'from' => 'required',
-            'to' => 'required',
-            'price' => 'required|float',
-            'departure_time' => 'required',
-            'arrival_time' => 'required',
+        $requestData = $request->get('route');
+        $from = Station::where('city', $requestData['fromCityName'])->first();
+        $validator = Validator::make($request->all(),[
+            'route.fromCityName' => 'required',
+            'route.toCityName' => 'required',
+            'route.price' => 'required',
+            'route.departureTime' => 'required',
+            'route.departureDate' => 'required',
+            'route.arrivalTime' => 'required',
+            'route.arrivalDate' => 'required',
+            'route.trainNumber' => 'required',
         ]);
 
         if($validator->fails()){
@@ -43,15 +64,20 @@ class RouteController extends Controller
         }
 
         $route = new Route();
-        $route->price = Request::get('price');
-        $route->departure_time = Request::get('departure_time');
-        $route->arrival_time = Request::get('arrival_time');
+        $route->price = $request->get('price');
+        $departureDatetime = $this->dateTimeHelper
+            ->formateDateTime($requestData['departureDate'], $requestData['departureTime']);
+        $route->departure_time = $departureDatetime;
 
-        $form = Station::where('city', Request::get('from'));
-        $to = Station::where('city', Request::get('to'));
+        $arrivalDateTime = $this->dateTimeHelper
+            ->formateDateTime($requestData['arrivalDate'], $requestData['arrivalTime']);
+        $route->arrival_time = $arrivalDateTime;
 
-        $route->from()->save($form);
-        $route->to()->save($to);
+        $from = Station::where('city', $requestData['fromCityName'])->first();
+        $to = Station::where('city', $requestData['toCityName'])->first();
+        $route->from()->associate($from);
+        $route->to()->associate($to);
+
         $route->save();
 
         return response()->json([

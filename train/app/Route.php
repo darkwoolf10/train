@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property float price
  * @property \DateTime departure_time
  * @property \DateTime arrival_time
+ * @property mixed from
+ * @property mixed to
  * @package App
  */
 class Route extends Model

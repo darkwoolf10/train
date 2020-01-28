@@ -24,4 +24,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'admin'], function() {
     Route::get('/routes', 'Admin\RouteController@index');
+    Route::post('/route-store', 'Admin\RouteController@store');
 });
