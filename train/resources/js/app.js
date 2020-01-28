@@ -17,5 +17,7 @@ require('./components/Hello');
 require('./components/ticket-search/TicketSearch');
 require('./components/admin-page/AdminPage');
 require('./components/choose-seat/ChooseSeat');
-require('./components/admin-page/train-route-list/TrainRouteList')
-require('./components/admin-page/train-route-list-item/TrainRouteListItem')
+require('./components/admin-page/train-route-list/TrainRouteList');
+require('./components/admin-page/train-route-list-item/TrainRouteListItem');
+require('./components/ticket-list/TicketList');
+require('./components/ticket-list-item/TicketListItem');
