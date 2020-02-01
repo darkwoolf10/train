@@ -93,7 +93,7 @@ class RouteController extends Controller
         $resultRoutes = [];
 
         foreach ($routes as $route) {
-            $routeDate = Carbon::parse($route->arrival_time)->format('Y/m/d');
+            $routeDate = Carbon::parse($route->departure_time)->format('Y/m/d');
 
             if ($findDate === $routeDate) {
                 $route['from'] = $route->from;
