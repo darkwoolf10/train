@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Link,
 } from 'react-router-dom';
 import TicketSearch from '../ticket-search/TicketSearch';
 
@@ -14,7 +15,7 @@ export default class App extends Component {
       <div className="app">
         <Router>
           <Switch>
-            <Route path='/ticket-search' component={TicketSearch}>
+            <Route path='/' component={TicketSearch}>
 
             </Route>
           </Switch>
@@ -23,6 +24,7 @@ export default class App extends Component {
   }
 }
 
-if (document.getElementById('app')) {
-  ReactDOM.render(<App />, document.getElementById('app'));
+if (document.getElementById('ticket-search')) {
+  ReactDOM.render(<App />, document.getElementById('ticket-search'));
 }
+

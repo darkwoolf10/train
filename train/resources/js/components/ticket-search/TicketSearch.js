@@ -13,6 +13,8 @@ import axios from 'axios';
 
 import './TicketSearch.css';
 
+import TrainRouteList from '../admin-page/train-route-list/TrainRouteList';
+
 export default class TicketSearch extends Component {
 
   constructor() {
@@ -21,7 +23,9 @@ export default class TicketSearch extends Component {
       cities: [],
       from: '',
       to: '',
-      selectedDate: new Date()
+      selectedDate: new Date(),
+      routes: [],
+      isFound: false,
     }
 
     this.hadleChange = this.hadleChange.bind(this);
@@ -52,6 +56,7 @@ export default class TicketSearch extends Component {
         date: this.state.selectedDate
       }
     })
+      .then(res => this.setState({ ...this.state, routes: res.data.response, isFound: true }))
   }
 
   componentDidMount() {
@@ -63,55 +68,56 @@ export default class TicketSearch extends Component {
   }
 
   render() {
-    return (
-      <form className="searchTicket">
-        <div className="from">
-          <InputLabel id="demo-simple-select-label">From</InputLabel>
-          <Select
-            name="from"
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            onChange={this.hadleChange}
-          >
-            {
-              this.state.cities.map((city, index) => <MenuItem value={city.name} key={city.id} >{city.name}</MenuItem>)
-            }
-          </Select>
-        </div>
-        <div className="to">
-          <InputLabel id="demo-simple-select-label">To</InputLabel>
-          <Select
-            name="to"
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            onChange={this.hadleChange}
-          >
-            {
-              this.state.cities.map((city, index) => <MenuItem value={city.name} key={city.id} >{city.name}</MenuItem>)
-            }
-          </Select>
-        </div>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <KeyboardDatePicker
-            disableToolbar
-            variant="inline"
-            format="MM/dd/yyyy"
-            margin="normal"
-            id="date-picker-inline"
-            label="Select date"
-            value={this.state.selectedDate}
-            onChange={this.handleDateChange}
-            KeyboardButtonProps={{
-              'aria-label': 'change date',
-            }}
-          />
-        </MuiPickersUtilsProvider>
-        <SearchIcon onClick={this.search}></SearchIcon>
-      </form>
-    );
+    if (!this.state.isFound) {
+      return (
+        <form className="searchTicket">
+          <div className="from">
+            <InputLabel id="demo-simple-select-label">From</InputLabel>
+            <Select
+              name="from"
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              onChange={this.hadleChange}
+            >
+              {
+                this.state.cities.map((city, index) => <MenuItem value={city.name} key={city.id} >{city.name}</MenuItem>)
+              }
+            </Select>
+          </div>
+          <div className="to">
+            <InputLabel id="demo-simple-select-label">To</InputLabel>
+            <Select
+              name="to"
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              onChange={this.hadleChange}
+            >
+              {
+                this.state.cities.map((city, index) => <MenuItem value={city.name} key={city.id} >{city.name}</MenuItem>)
+              }
+            </Select>
+          </div>
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <KeyboardDatePicker
+              disableToolbar
+              variant="inline"
+              format="MM/dd/yyyy"
+              margin="normal"
+              id="date-picker-inline"
+              label="Select date"
+              value={this.state.selectedDate}
+              onChange={this.handleDateChange}
+              KeyboardButtonProps={{
+                'aria-label': 'change date',
+              }}
+            />
+          </MuiPickersUtilsProvider>
+          <SearchIcon onClick={this.search}></SearchIcon>
+        </form>
+      );
+    }
+    else {
+      return (<TrainRouteList routes={this.state.routes} />)
+    }
   }
-}
-
-if (document.getElementById('ticket-search')) {
-  ReactDOM.render(<TicketSearch />, document.getElementById('ticket-search'));
 }
