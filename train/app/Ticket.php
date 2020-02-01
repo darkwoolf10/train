@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
+ * @property mixed position
+ * @property mixed baggage
+ * @property mixed bedspread
+ * @property mixed tea
  * @package App
  */
 class Ticket extends Model

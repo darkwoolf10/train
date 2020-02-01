@@ -13,11 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-}); 
-
-Route::view('/{path?}', 'welcome')
-     ->where('path', '.*')
-     ->name('react');
+});
 
 Auth::routes();
 
@@ -27,3 +23,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function() {
     Route::get('/', 'AdminController@index');
     Route::get('/create-station', 'Admin\StationController@store')->name('create-station');
 });
+
+Route::view('/{path?}', 'welcome')
+    ->where('path', '.*')
+    ->name('react');
