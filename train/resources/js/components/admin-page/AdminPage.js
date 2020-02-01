@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import AddRoute from './add-route/AddRoute';
+import axios from 'axios';
+
+import TrainRouteList from './train-route-list/TrainRouteList';
 
 export default class AdminPage extends Component {
 
@@ -9,16 +12,20 @@ export default class AdminPage extends Component {
     super();
     this.state = {
       showModal: false,
+      routes: []
     }
     this.addNewTrainRoute = this.addNewTrainRoute.bind(this);
     this.closeForm = this.closeForm.bind(this);
   }
 
+  componentDidMount() {
+    axios.get('api/routes')
+      .then(res => this.setState({ routes: res.data.response }));
+  }
+
   addNewTrainRoute() {
-    this.setState({
-      ...this.state,
-      showModal: !this.state.showModal
-    })
+    axios.get('api/routes')
+      .then(res => this.setState({ routes: res.data.response, showModal: !this.state.showModal }));
   }
 
   closeForm() {
@@ -29,8 +36,9 @@ export default class AdminPage extends Component {
   render() {
     return (
       <div>
+        <TrainRouteList routes={this.state.routes} />
         <AddCircleOutlineIcon onClick={this.addNewTrainRoute}></AddCircleOutlineIcon>
-        <AddRoute closeForm={this.closeForm} showModal={this.state.showModal}/>
+        <AddRoute closeForm={this.closeForm} showModal={this.state.showModal} />
       </div>
     )
   }

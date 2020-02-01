@@ -14,6 +14,7 @@ require('./bootstrap');
 
 require('./components/Example');
 require('./components/Hello');
+require('./components/app/App');
 require('./components/ticket-search/TicketSearch');
 require('./components/admin-page/AdminPage');
 require('./components/choose-seat/ChooseSeat');

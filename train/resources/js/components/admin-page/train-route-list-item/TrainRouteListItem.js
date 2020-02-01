@@ -3,14 +3,14 @@ import Button from '@material-ui/core/Button';
 
 import './TrainRouteListItem.css';
 
-const TrainRouteListItem = ({ route: { trainNumber, from, to, departureTime, departureDate, arrivalTime, arrivalDate, freeSeats } }) => {
+const TrainRouteListItem = ({ route: { from, to, price, departure_time, arrival_time, train_number } }) => {
   return (
     <div className="table-row">
-      <div className="column">{trainNumber}</div>
-      <div className="column">{`${from}/${to}`}</div>
-      <div className="column">{`${departureTime} ${departureDate}`}</div>
-      <div className="column">{`${arrivalTime} ${arrivalDate}`}</div>
-      <div className="column">{freeSeats}</div>
+      <div className="column">{train_number}</div>
+      <div className="column">{`${from.city}/${to.city}`}</div>
+      <div className="column">{`${departure_time}`}</div>
+      <div className="column">{`${arrival_time}`}</div>
+      <div className="column">{price} UAH</div>
     </div>
   )
 }
