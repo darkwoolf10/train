@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property mixed baggage
  * @property mixed bedspread
  * @property mixed tea
+ * @property User user
  * @package App
  */
 class Ticket extends Model

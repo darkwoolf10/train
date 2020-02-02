@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Route;
-use App\Ticket;
+use App\Http\Services\TicketService;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Auth;
 
 /**
  * @package App\Http\Controllers\Api
@@ -14,36 +12,30 @@ use Illuminate\Support\Facades\Auth;
 class TicketController
 {
     /**
+     * @var TicketService
+     */
+    private $ticketService;
+
+    /**
+     * TicketController constructor.
+     * @param TicketService $ticketService
+     */
+    public function __construct(TicketService $ticketService)
+    {
+        $this->ticketService = $ticketService;
+    }
+
+    /**
      * @param Request $request
      * @return JsonResponse
      */
     public function store(Request $request): JsonResponse
     {
-        $validator = $request->validate([
-            'route' => 'required',
-            'position' => 'required',
-            'baggage' => 'required',
-            'bedspread' => 'required',
-            'tea' => 'required',
-        ]);
-//
-//        if ($validator->fails()) {
-//            throw new \InvalidArgumentException('Invalid data');
-//        }
+        $tickets = $request->get('tickets');
 
-        $ticket = new Ticket();
-        $route = Route::find($request->get('route'));
-        $ticket->route()->associate($route);
-        $ticket->position = $request->get('position');
-        $ticket->baggage = $request->get('baggage');
-        $ticket->bedspread = $request->get('bedspread');
-        $ticket->tea = $request->get('tea');
-
-        if (Auth::user()) {
-            $ticket->user = Auth::user()->getId();
+        foreach ($tickets as $ticket) {
+            $this->ticketService->createTicket($ticket);
         }
-
-        $ticket->save();
 
         return response()->json([
             'response' => 'Payment was successful!',
