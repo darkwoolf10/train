@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property float price
@@ -30,5 +31,13 @@ class Route extends Model
     public function to()
     {
         return $this->belongsTo('App\Station');
+    }
+
+    /**
+     * @return hasMany
+     */
+    public function tickets(): hasMany
+    {
+        return $this->hasMany(Ticket::class);
     }
 }

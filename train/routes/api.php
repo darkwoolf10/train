@@ -18,7 +18,7 @@ Route::post('/payment', 'Api\PaymentController@payment')->name('payment');
 Route::get('/stations', 'Api\StationsController@index')->name('stations');
 Route::get('/find-routes', 'Api\RouteController@find')->name('find-routes');
 Route::get('/routes', 'Api\RouteController@index')->name('routes');
-Route::get('/route/empty-seats', 'Api\RouteController@occupiedSeats');
+Route::get('/route/occupied-seats', 'Api\RouteController@occupiedSeats');
 Route::get('/find-routes', 'Api\RouteController@findRoutes');
 Route::post('/create-ticket', 'Api\TicketController@store')->name('create-ticket');
 
