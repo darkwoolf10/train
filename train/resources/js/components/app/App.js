@@ -7,6 +7,7 @@ import {
   Link,
 } from 'react-router-dom';
 import TicketSearch from '../ticket-search/TicketSearch';
+import ChooseSeat from '../choose-seat/ChooseSeat';
 
 export default class App extends Component {
 
@@ -15,7 +16,11 @@ export default class App extends Component {
       <div className="app">
         <Router>
           <Switch>
-            <Route path='/' component={TicketSearch}>
+            <Route exact path='/' component={TicketSearch}>
+
+            </Route>
+
+            <Route path='/route/:id' component={ChooseSeat}>
 
             </Route>
           </Switch>

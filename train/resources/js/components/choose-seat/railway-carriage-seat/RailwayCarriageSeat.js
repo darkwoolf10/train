@@ -1,9 +1,9 @@
 import React from 'react';
 import classNames from 'classnames'
 
-import './RailwayCarriadgeSeat.css';
+import './RailwayCarriageSeat.css';
 
-const RailwayCarriadgeSeat = ({ seat: { number, sold, selected }, onSelectSeat, seat }) => {
+const RailwayCarriageSeat = ({ seat: { number, sold, selected }, onSelectSeat, seat }) => {
   let seatClass = classNames({
     "seat": true,
     "up": number <= 18 || number > 36 && number % 2 == 0,
@@ -11,7 +11,6 @@ const RailwayCarriadgeSeat = ({ seat: { number, sold, selected }, onSelectSeat, 
     "selected": selected,
     "sold": sold,
   })
-
   return (
     <div
       onClick={() => onSelectSeat(seat)}
@@ -26,4 +25,4 @@ const RailwayCarriadgeSeat = ({ seat: { number, sold, selected }, onSelectSeat, 
   )
 }
 
-export default RailwayCarriadgeSeat;
+export default RailwayCarriageSeat;

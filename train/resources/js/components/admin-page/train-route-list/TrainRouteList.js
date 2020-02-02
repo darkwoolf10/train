@@ -7,7 +7,6 @@ import './TrainRouteList.css';
 
 
 const TrainRouteList = ({ routes }) => {
-  console.log(routes);
   return (
     <div className='routes-table'>
       <div className="header">
@@ -27,7 +26,3 @@ const TrainRouteList = ({ routes }) => {
 }
 
 export default TrainRouteList;
-
-// if (document.getElementById('ticket-search')) {
-//   ReactDOM.render(<TrainRouteList />, document.getElementById('ticket-search'));
-// }
