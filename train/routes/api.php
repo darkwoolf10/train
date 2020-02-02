@@ -20,6 +20,7 @@ Route::get('/find-routes', 'Api\RouteController@find')->name('find-routes');
 Route::get('/routes', 'Api\RouteController@index')->name('routes');
 Route::get('/route/empty-seats', 'Api\RouteController@emptySeats');
 Route::get('/find-routes', 'Api\RouteController@findRoutes');
+Route::post('/create-ticket', 'Api\TicketController@store')->name('create-ticket');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

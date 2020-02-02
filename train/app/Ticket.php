@@ -18,7 +18,7 @@ class Ticket extends Model
     /**
      * @return HasOne
      */
-    public function payment()
+    public function payment(): hasOne
     {
         return $this->hasOne(Payment::class);
     }
@@ -26,8 +26,16 @@ class Ticket extends Model
     /**
      * @return BelongsTo
      */
-    public function route()
+    public function route(): BelongsTo
     {
         return $this->belongsTo(Route::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }
