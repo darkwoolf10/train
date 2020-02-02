@@ -15,12 +15,12 @@ class TicketService
     public function createTicket(array $request): Ticket
     {
         $ticket = new Ticket();
-        $route = Route::find($request->get('route'));
+        $route = Route::find($request['route']);
         $ticket->route()->associate($route);
-        $ticket->position = $request->get('position');
-        $ticket->baggage = $request->get('baggage');
-        $ticket->bedspread = $request->get('bedspread');
-        $ticket->tea = $request->get('tea');
+        $ticket->position = $request['position'];
+        $ticket->baggage = $request['baggage'];
+        $ticket->bedspread = $request['bedspread'];
+        $ticket->tea = $request['tea'];
 
         if (Auth::user()) {
             $ticket->user = Auth::user()->getId();
