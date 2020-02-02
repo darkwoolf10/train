@@ -66,7 +66,7 @@ class RouteController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function emptySeats(Request $request): JsonResponse
+    public function occupiedSeats(Request $request): JsonResponse
     {
         $route = Route::find($request->get('route'));
         $ticketsPosition = [];
