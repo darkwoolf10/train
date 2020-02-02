@@ -22,9 +22,9 @@ class TicketService
         $ticket->bedspread = $request['bedspread'];
         $ticket->tea = $request['tea'];
 
-        if (Auth::user()) {
-            $ticket->user = Auth::user()->getId();
-        }
+//        if (Auth::user()) {
+//            $ticket->user()->associate(Auth::user()->getId());
+//        }
 
         $ticket->save();
 
