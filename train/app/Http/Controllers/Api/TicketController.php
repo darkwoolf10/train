@@ -26,10 +26,10 @@ class TicketController
             'bedspread' => 'required',
             'tea' => 'required',
         ]);
-
-        if ($validator->fails()) {
-            throw new \InvalidArgumentException('Invalid data');
-        }
+//
+//        if ($validator->fails()) {
+//            throw new \InvalidArgumentException('Invalid data');
+//        }
 
         $ticket = new Ticket();
         $route = Route::find($request->get('route'));

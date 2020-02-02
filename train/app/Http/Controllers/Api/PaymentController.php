@@ -25,9 +25,9 @@ class PaymentController extends Controller
             'price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
         ]);
 
-        if ($validator->fails()) {
-            throw new \InvalidArgumentException('Invalid data');
-        }
+//        if ($validator->fails()) {
+//            throw new \InvalidArgumentException('Invalid data');
+//        }
 
         $payment = new Payment();
         $payment->cardNumber = $request->get('cardNumber');
