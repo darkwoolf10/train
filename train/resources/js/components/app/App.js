@@ -6,8 +6,10 @@ import {
   Route,
   Link,
 } from 'react-router-dom';
+
 import TicketSearch from '../ticket-search/TicketSearch';
 import ChooseSeat from '../choose-seat/ChooseSeat';
+import AdminPage from '../admin-page/AdminPage';
 
 export default class App extends Component {
 
@@ -20,7 +22,7 @@ export default class App extends Component {
 
             </Route>
 
-            <Route path='/route/:id' component={ChooseSeat}>
+            <Route path='/route' component={ChooseSeat}>
 
             </Route>
           </Switch>

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import './TrainRouteListItem.css';
 
-const TrainRouteListItem = ({ route: { from, to, price, departure_time, arrival_time, train_number, id } }) => {
+const TrainRouteListItem = ({ route: { from, to, price, departure_time, arrival_time, train_number, id }, admin }) => {
   return (
     <React.Fragment>
       <div className="table-row">
@@ -15,7 +15,22 @@ const TrainRouteListItem = ({ route: { from, to, price, departure_time, arrival_
         <div className="column">{`${arrival_time}`}</div>
         <div className="column">{price} UAH</div>
       </div>
-      <Button><Link to={`/route/${id}`}>Select</Link></Button>
+      {
+        admin ?
+          null :
+          <Button>
+            <Link
+              to=
+              {
+                {
+                  pathname: `/route`,
+                  state: { price: price, id: id }
+                }
+              }>Select
+            </Link>
+          </Button>
+      }
+
     </React.Fragment>
   )
 }

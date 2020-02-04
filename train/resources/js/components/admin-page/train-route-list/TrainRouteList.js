@@ -6,7 +6,7 @@ import TrainRouteListItem from '../train-route-list-item/TrainRouteListItem';
 import './TrainRouteList.css';
 
 
-const TrainRouteList = ({ routes }) => {
+const TrainRouteList = ({ routes, admin }) => {
   return (
     <div className='routes-table'>
       <div className="header">
@@ -18,7 +18,7 @@ const TrainRouteList = ({ routes }) => {
       </div>
       <div className="body">
         {
-          routes.map(route => <TrainRouteListItem route={route} />)
+          routes.map(route => <TrainRouteListItem admin={admin} route={route} />)
         }
       </div>
     </div>

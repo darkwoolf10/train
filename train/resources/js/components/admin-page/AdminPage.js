@@ -36,7 +36,7 @@ export default class AdminPage extends Component {
   render() {
     return (
       <div>
-        <TrainRouteList routes={this.state.routes} />
+        <TrainRouteList admin={true} routes={this.state.routes} />
         <AddCircleOutlineIcon onClick={this.addNewTrainRoute}></AddCircleOutlineIcon>
         <AddRoute closeForm={this.closeForm} showModal={this.state.showModal} />
       </div>
