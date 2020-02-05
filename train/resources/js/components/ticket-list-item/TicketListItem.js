@@ -14,11 +14,11 @@ export default class TicketListItem extends Component {
   }
 
   onHandleChange(event) {
-
+    const { tea, baggage, bedspread } = this.state;
     this.setState({
       ...this.state,
       [event.target.name]: event.target.checked,
-    }, () => this.props.buy(this.state))
+    }, () => this.props.buy({ number: this.props.number, tea, baggage, bedspread }))
   }
 
   render() {

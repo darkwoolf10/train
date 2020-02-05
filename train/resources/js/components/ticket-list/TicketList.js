@@ -15,7 +15,6 @@ export default class TicketList extends Component {
       baggage: false,
       bedspread: false,
       total: 0,
-      count: 0,
     }
     this.buy = this.buy.bind(this);
     this.relatedServices

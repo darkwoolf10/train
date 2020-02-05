@@ -7,6 +7,8 @@ import axios from 'axios';
 
 import './ChooseSeat.css';
 
+import { Redirect, Route } from 'react-router-dom';
+
 export default class ChooseSeat extends Component {
 
   constructor() {
@@ -20,7 +22,8 @@ export default class ChooseSeat extends Component {
         selected: false,
         baggage: false,
         bedspread: false,
-        tea: false
+        tea: false,
+        redirect: false,
       }
       seats.push(seat);
     }
@@ -127,9 +130,15 @@ export default class ChooseSeat extends Component {
     axios.post('http://localhost:8080/api/create-ticket', {
       tickets
     })
+      .then(_ => this.setState({ redirect: true }))
   }
 
   render() {
+    if (this.state.redirect) {
+      return (<Route to="/sold" render={
+        () => <h2>The tickets successfully purchased</h2>
+      } />)
+    }
     return (
       <React.Fragment>
         <RailwayCarriage seats={this.state.seats} onSelectSeat={this.onSelectSeat} />
